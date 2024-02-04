@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "--- Setup crane"
+
+CRANE_VERSION="${BUILDKITE_PLUGIN_SETUP_CRANE_VERSION:-$(curl --silent --show-error "https://api.github.com/repos/google/go-containerregistry/releases/latest" | jq --raw-output ".tag_name")}"
+
+# TODO: Negotiate operating system
+CRANE_OS="Linux" # or Darin, Windows
+
+# TODO: Negotiate architecture
+CRANE_ARCH="x86_64" # or arm64, x86_64, armv6, i386, s390x
+
+# TODO: Avoid installing if already installed at correct version
+curl --silent --show-error --location "https://github.com/google/go-containerregistry/releases/download/${CRANE_VERSION}/go-containerregistry_${CRANE_OS}_${CRANE_ARCH}.tar.gz" | tar -zxv -C /usr/local/bin/ crane
+
+crane version
