@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-echo "--- Setup crane"
+echo "~~~ Setup crane"
 
 CRANE_VERSION="${BUILDKITE_PLUGIN_SETUP_CRANE_VERSION:-$(curl --silent --show-error "https://api.github.com/repos/google/go-containerregistry/releases/latest" | jq --raw-output ".tag_name")}"
 
